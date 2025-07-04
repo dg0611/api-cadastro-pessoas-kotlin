@@ -19,4 +19,8 @@ class PessoaService(
         return pessoaResponseMapperDTO.mapper(pessoaCadastrada)
     }
 
+    fun listar(): List<PessoaResponseDTO> {
+        return repository.findAll().map { pessoaResponseMapperDTO.mapper(it) }
+    }
+
 }

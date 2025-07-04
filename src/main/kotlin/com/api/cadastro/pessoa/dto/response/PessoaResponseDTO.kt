@@ -6,5 +6,5 @@ data class PessoaResponseDTO(
     val id: Long? = null,
     val nome: String,
     val email: String,
-    val telefone: MutableList<Telefone> = mutableListOf()
+    val telefone: List<Telefone> = listOf()
 )
