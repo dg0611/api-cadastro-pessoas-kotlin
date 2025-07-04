@@ -1,14 +1,17 @@
 package com.api.cadastro.pessoa.model
 
-import jakarta.persistence.CascadeType
-import jakarta.persistence.Entity
-import jakarta.persistence.OneToMany
+import com.fasterxml.jackson.annotation.JsonManagedReference
+import jakarta.persistence.*
 
 @Entity
 data class Pessoa(
-    val nome: String,
-    val email: String,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null,
+    val nome: String = "",
+    val email: String = "",
 
-    @OneToMany(mappedBy = "pessoa", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val telefone: MutableList<Telefone> = mutableListOf()
+    @OneToMany(mappedBy = "pessoa", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    var telefone: MutableList<Telefone> = mutableListOf()
 )

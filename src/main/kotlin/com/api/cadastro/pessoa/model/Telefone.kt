@@ -1,16 +1,19 @@
 package com.api.cadastro.pessoa.model
 
-import jakarta.persistence.Entity
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
+import com.fasterxml.jackson.annotation.JsonBackReference
+import jakarta.persistence.*
 
 @Entity
 data class Telefone(
-    val numero: String,
-    val tipo: String,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long?,
+    val numero: String = "",
+    val tipo: String = "",
 
     @ManyToOne
     @JoinColumn(name = "pessoa_id")
-    val pessoa: Pessoa? = null
+    @JsonBackReference
+    var pessoa: Pessoa? = null
 
 )
