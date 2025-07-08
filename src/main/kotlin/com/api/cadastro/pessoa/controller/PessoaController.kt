@@ -28,6 +28,16 @@ class PessoaController(private val service: PessoaService) {
         }
     }
 
+    @GetMapping("/{id}")
+    fun listarPessoaPorId(@PathVariable id: Long): ResponseEntity<PessoaResponseDTO> {
+        val pessoa = service.listarPorId(id)
+        return if (pessoa != null) {
+            ResponseEntity.ok(pessoa)
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
     @PostMapping
     fun cadastrarPessoa(@RequestBody formPessoa: PessoaRequestDTO): ResponseEntity<PessoaResponseDTO> {
         val pessoaCriada = service.cadastrar(formPessoa)
