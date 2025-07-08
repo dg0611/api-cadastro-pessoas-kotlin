@@ -4,7 +4,9 @@ import com.api.cadastro.pessoa.dto.request.PessoaRequestDTO
 import com.api.cadastro.pessoa.dto.response.PessoaResponseDTO
 import com.api.cadastro.pessoa.service.PessoaService
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -37,4 +39,12 @@ class PessoaController(private val service: PessoaService) {
         return ResponseEntity.created(url).body(pessoaCriada)
     }
 
+    @DeleteMapping("/{id}")
+    fun deletarPessoa(@PathVariable id: Long): ResponseEntity<Void> {
+        return if (service.deletar(id)) {
+            ResponseEntity.noContent().build()
+        } else {
+            return ResponseEntity.notFound().build()
+        }
+    }
 }

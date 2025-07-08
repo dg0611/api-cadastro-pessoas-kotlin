@@ -23,4 +23,11 @@ class PessoaService(
         return repository.findAll().map { pessoaResponseMapperDTO.mapper(it) }
     }
 
+    fun deletar(id: Long): Boolean {
+        return repository.findById(id).map {
+            repository.delete(it)
+            true
+        }.orElse(false)
+    }
+
 }
