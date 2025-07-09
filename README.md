@@ -32,16 +32,17 @@ Este é um projeto em Kotlin com Spring Boot que fornece uma API REST para cadas
 
 
 ```plaintext
-src/main/kotlin/com/example/seuprojeto
+src/main/kotlin/com/api/cadastro-pessoas
 ├── config/                 # Configurações de segurança
 ├── controller/             # Endpoints REST
 ├── dto/                    # DTOs de entrada e saída
 ├── exception/              # Tratamento global de exceções
+├── mapper/                 # Classes de conversão de tipos
 ├── model/                  # Entidades do banco
 ├── repository/             # Interfaces de persistência
 ├── security/               # JWT e filtros de autenticação/autorização
 ├── service/                # Regras de negócio
-└── SeuProjetoApplication.kt
+└── Application.kt
 
 ```
 ---
@@ -61,12 +62,12 @@ Este projeto segue os principais padrões e boas práticas para garantir organiz
 
 | Padrão              | Descrição                                                                                     |
 |---------------------|-----------------------------------------------------------------------------------------------|
-| **DTO (Data Transfer Object)** | Abstração dos dados trafegados pela API, separando domínio da apresentação.           |
-| **Repository**       | Abstração da camada de persistência com Spring Data JPA.                                    |
+| **DTO (Data Transfer Object)** | Abstração dos dados trafegados pela API, separando domínio da apresentação.        |
+| **Repository**       | Abstração da camada de persistência com Spring Data JPA.                                     |
 | **Service Layer**    | Centraliza as regras de negócio, isolando o controller da lógica e do acesso a dados.        |
-| **Singleton**        | Beans gerenciados pelo Spring são instanciados uma única vez durante o ciclo da aplicação.    |
+| **Singleton**        | Beans gerenciados pelo Spring são instanciados uma única vez durante o ciclo da aplicação.   |
 | **Strategy**         | Utilizado pelo Spring Security e JWT para diferentes formas de autenticação e autorização.   |
-
+| **Data Mapper**      | Padrão estrutural que separa a lógica de mapeamento dos dados do modelo de domínio|
 ---
 ```
 ✨ Autor
