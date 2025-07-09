@@ -4,7 +4,7 @@ spring:
 
   datasource:
     driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:cadastro
+    url: jdbc:h2:mem:cadastro_db
     username: sa
     password:
 

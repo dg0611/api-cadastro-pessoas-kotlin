@@ -8,8 +8,8 @@ data class Pessoa(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val nome: String = "",
-    val email: String = "",
+    var nome: String = "",
+    var email: String = "",
 
     @OneToMany(mappedBy = "pessoa", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference

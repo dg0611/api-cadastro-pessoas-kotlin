@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -21,11 +22,7 @@ class PessoaController(private val service: PessoaService) {
     @GetMapping
     fun listarPessoas(): ResponseEntity<List<PessoaResponseDTO>> {
         val pessoas = service.listar()
-        return if (pessoas.isEmpty()) {
-            ResponseEntity.noContent().build()
-        } else {
-            return ResponseEntity.ok(pessoas)
-        }
+        return ResponseEntity.ok(pessoas)
     }
 
     @GetMapping("/{id}")
@@ -47,6 +44,19 @@ class PessoaController(private val service: PessoaService) {
             .buildAndExpand(pessoaCriada.id) // Substitui {id} com o ID cadastrado
             .toUri()
         return ResponseEntity.created(url).body(pessoaCriada)
+    }
+
+    @PutMapping("/{id}")
+    fun atualizarPessoa(
+        @PathVariable id: Long,
+        @RequestBody formPessoa: PessoaRequestDTO
+    ): ResponseEntity<PessoaResponseDTO> {
+        val pessoaExistente = service.atualizar(id, formPessoa)
+        if (pessoaExistente != null) {
+            return ResponseEntity.ok(pessoaExistente)
+        } else {
+            return ResponseEntity.notFound().build()
+        }
     }
 
     @DeleteMapping("/{id}")
